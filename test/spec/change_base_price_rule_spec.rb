@@ -10,7 +10,7 @@ describe ChangeBasePriceRule do
 
     let!(:new_price_for_3_or_more_rule){ChangeBasePriceRule.new(items_to_get_a_good_price, new_price)}
     
-    it "should get execution value 0.0£ when number of items items is 0 or price are 0.0£" do
+    it "should get execution value 0.0£ when number of items items is 0 or base price are 0.0£" do
       
       number_of_items = 1
       base_price = BigDecimal(0)   
@@ -22,28 +22,28 @@ describe ChangeBasePriceRule do
       expect(new_price_for_3_or_more_rule.execute(number_of_items, base_price)).to eq(0)  
     end
 
-    it "should get execution value 5.0£ when number of items is 1 and price is 5.0£" do
+    it "should get execution value 5.0£ when number of items is 1 and base price is 5.0£" do
       number_of_items = 1
       base_price = BigDecimal(5)   
       expect(new_price_for_3_or_more_rule.execute(number_of_items, base_price)).to eq(5)
     end
 
-    it "should get execution value 10.0£ when number of items is 2 and price is 5.0£" do
+    it "should get execution value 10.0£ when number of items is 2 and base price is 5.0£" do
       number_of_items = 2
       base_price = BigDecimal(5)   
       expect(new_price_for_3_or_more_rule.execute(number_of_items, base_price)).to eq(10)
     end
 
-    it "should get execution value 9.0£ when number of items is 3 and price is 5.0£" do
+    it "should get execution value 13.5£ when number of items is 3 and base price is 5.0£" do
       number_of_items = 3
       base_price = BigDecimal(5)   
-      expect(new_price_for_3_or_more_rule.execute(number_of_items, base_price)).to eq(9)
+      expect(new_price_for_3_or_more_rule.execute(number_of_items, base_price)).to eq(13.5)
     end
 
-    it "should get execution value 13.5£ when number of items is 3 and price is 5.0£" do
+    it "should get execution value 18.5£ when number of items is 4 and base price is 5.0£" do
       number_of_items = 4
       base_price = BigDecimal(5)   
-      expect(new_price_for_3_or_more_rule.execute(number_of_items, base_price)).to eq(13.5)
+      expect(new_price_for_3_or_more_rule.execute(number_of_items, base_price)).to eq(18.0)
     end
 
 
