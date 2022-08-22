@@ -8,5 +8,15 @@ class ApplyDiscountRule < BaseRule
     @total_parts = total_parts
   end
 
-   
+  
+  # total_items:  how many items was in cart 
+  # base_price:   base_price of rule
+  def execute(total_items, base_price)
+    if total_items < @threshold_value
+      total_items * base_price
+    else
+      total_items *  (@parts * (base_price / @total_parts))
+    end
+  end
+ 
 end
