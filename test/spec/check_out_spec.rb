@@ -7,7 +7,7 @@ require 'bigdecimal'
  
 describe CheckOut do
 
-  context ": In the context of pricings and rules of requirements" do
+  context ": In the context of pricings and princing rules of requirements" do
     
     let(:pricing_rules){
       #by default BaseRule      
