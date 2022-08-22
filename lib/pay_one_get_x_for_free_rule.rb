@@ -10,7 +10,9 @@ class PayOneGetXForFreeRule < BaseRule
   # total_items:  how many items was in cart 
   # base_price:   base_price of rule
   def execute(total_items, base_price)
+
     rest = total_items.modulo(@x_for_free + 1)
+    #when rest is greather than 0 we count one item more 
     (total_items.div(@x_for_free + 1)  * base_price) + (  ( rest != 0 ? 1 : 0)  * base_price)    
   end
 
