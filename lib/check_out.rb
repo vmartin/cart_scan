@@ -8,4 +8,7 @@ class CheckOut
 
   end
 
+  def total
+    return 0
+  end
 end

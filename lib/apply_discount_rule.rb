@@ -9,7 +9,7 @@ class ApplyDiscountRule < BaseRule
   end
 
   
-  # total_items:  how many items was in cart 
+  # total_items:  how many items are in cart 
   # base_price:   base_price of rule
   def execute(total_items, base_price)
     if total_items < @threshold_value

@@ -3,8 +3,8 @@ require 'bigdecimal'
  
 describe MockProducts do
 
-  it "should get price of 0.0£ when product code don't exixst" do   
-    expect(MockProducts.get_price("INVENTED_CODE")).to eq(0)  
+  it "should get price of 0.0£ when product code don't exist" do   
+    expect(MockProducts.get_price("FAKE_PRODUCT_CODE")).to eq(0)  
   end
 
   it "should get price of 3.11£ when product code is GR1" do   
