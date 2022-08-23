@@ -1,19 +1,25 @@
 require 'base_rule'
 class ChangeBasePriceRule < BaseRule
 
-  def initialize(threshold_value = 0, final_price = 0 )
+  # threshold_value : determines the threshold value from which the price change is applied (inclusive)
+  # new_price: the price that rule use if is need for execution method
+  def initialize(threshold_value = 0, new_price = 0 )
     @threshold_value = threshold_value
-    @final_price = BigDecimal(final_price)
+    @new_price = BigDecimal(new_price)
   end
 
-
-  # total_items:  how many items was in cart 
-  # base_price:   base_price of rule
+  # - Change base price calculation
+  #  
+  # total_items: number of scanned products for a concret product_code
+  # base_price:  price without discounts for a concret product_code
+  #
+  # how do it:   if total_items >= @threshold_value it use @new_price to do calculation
+  #              else use base_price
   def execute(total_items, base_price)
     if total_items < @threshold_value
       total_items * base_price
     else
-      total_items * @final_price
+      total_items * @new_price
     end
   end
 
