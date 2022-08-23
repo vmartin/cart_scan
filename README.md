@@ -3,13 +3,13 @@ Ruby classes to agregate items and proces their prices given diferent price rule
 
 ## Solution explained
 
-El objetivo de la solucion aportada a sido desacoplar la logica de calculo de precios de la classe chekcout y las pricing rules.
+The objective of the solution provided has been to decouple the price calculation logic of the checkout class and the pricing rules.
 
-Para conseguir esto se ha planteado una classe "BaseRule" de la que heredan las demas reglas de calculo de precios (PayOneGetXForFreeRule, ApplyDiscountRule, ChangeBasePriceRule), estas subclasses implementan un constructor con los parametros necessarios para inicializar la regla y una concrecion del metodo "execute".
+To achieve this, a "BaseRule" class has been proposed from which the other price calculation rules inherit (PayOneGetXForFreeRule, ApplyDiscountRule, ChangeBasePriceRule), these subclasses implement a constructor with the necessary parameters to initialize the rule and a specification of the "execute" method. ".
 
-Por otra banda, la classe checkout cumple con el contrato de interficie especificado en los requisitos. Esto lo hace contando cuantas ocurrencias scanea de cada codigo de producto y finalmente obtiene el total a partir de las reglas de precios correctamente inicalizadas para cada producto.
+On the other hand, the checkout class complies with the interface contract specified in the requirements. It does this by counting how many occurrences it scans of each product code and finally gets the total from the correctly initialized pricing rules for each product.
 
-Los archivos a tener en cuenta para todo esto son:
+The files to keep in mind for all this are:
 
 ```bash
  lib/base_rule.rb
@@ -19,13 +19,13 @@ Los archivos a tener en cuenta para todo esto son:
  lib/check_out.rb 
 ```
 
-Sin enbargo, no me ha dado tiempo de bajar el acoplamiento de la classe check_out.rb con mock_products.rb, aun asi, pienso que sigue siendo una buena solucion, ya que esta classe podria obtener los precios del un servicio de datos y no de un hash map estatico como lo hace ahora.
+However, I haven't had time to download the coupling of the check_out.rb class with mock_products.rb, even so, I think it's still a good solution, since this class could obtain the prices of a data service and not of a static hash map as it does now.
 
 ```bash
 lib/mock_products_spec.rb 
 ```
 
-Finalmente, se han incluido rspec test para todas las classes de proyecto y con diferentes contextos para verificar las funcionalidades parametrizables de estas classes.
+Finally, rspec tests have been included for all the project classes and with different contexts to verify the parameterizable functionalities of these classes.
 
 ```bash
  test/spec/base_rule_spec.rb
@@ -36,7 +36,7 @@ Finalmente, se han incluido rspec test para todas las classes de proyecto y con 
  test/spec/check_out_spec.rb 
 ```
 
-Especial atencion a la RSpec "check_out_spec.rb" este test contiene un contexto para la test data de los requisitos con y sin reglas de precios.
+Special attention to the RSpec "check_out_spec.rb" this test contains a context for the test data of the requirements with and without pricing rules.
 
 
 ## Tech Stack
