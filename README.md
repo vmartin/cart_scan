@@ -49,7 +49,14 @@ The good thing about all this is that you gain experience and different visions 
 It is what it has to have tried it...
 
 ## 🛠 Skills
-Javascript, HTML, CSS... to-do
+
+**Languages:** Ruby, Java, JavaScript, TypeScript, PL/Sql, C#, Vb6, VB.net
+
+**Frameworks:** Rails, Spring, Spring Boot, Struts, AngularJS, Angular 2.x
+
+**BD:** MySQl, Oracle
+
+**NoSQL BD:** Mongo DB, Solr, Redis 
 
 ## License
  
