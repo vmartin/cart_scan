@@ -79,4 +79,61 @@ describe CheckOut do
     end
   
   end  
+
+  context ": In the context of pricings of requirements withou pricing rules" do
+    
+    let(:empty_pricing_rules){
+      #by default BaseRule      
+      empty_pricing_rules = Hash.new(BaseRule.new)
+      
+      empty_pricing_rules
+    }
+
+    it "should get expected total price of 25.56£ when basket is: GR1,SR1,GR1,GR1,CF1" do 
+      co = CheckOut.new(empty_pricing_rules)
+      co.scan("GR1")
+      co.scan("SR1")
+      co.scan("GR1")
+      co.scan("GR1")
+      co.scan("CF1")
+      price = co.total 
+ 
+      expect(price).to eq(25.56)
+    end
+
+    it "should get expected total price of 6.22£ when basket is: GR1,GR1" do 
+      co = CheckOut.new(empty_pricing_rules)
+      co.scan("GR1")
+      co.scan("GR1")
+      price = co.total 
+
+      expect(price).to eq(6.22)
+    end
+
+    it "should get expected total price of 18.11£ when basket is: SR1,SR1,GR1,SR1" do 
+      co = CheckOut.new(empty_pricing_rules)
+      co.scan("SR1")
+      co.scan("SR1")
+      co.scan("GR1")
+      co.scan("SR1")
+      price = co.total 
+
+      expect(price).to eq(18.11)
+    end
+
+    it "should get expected total price of 41.8£ when basket is: GR1,CF1,SR1,CF1,CF1" do 
+      
+      co = CheckOut.new(empty_pricing_rules)
+      co.scan("GR1")
+      co.scan("CF1")
+      co.scan("SR1")
+      co.scan("CF1")
+      co.scan("CF1")
+      price = co.total 
+
+      expect(price).to eq(41.8)
+    end
+  
+  end
+
 end
