@@ -15,6 +15,6 @@ class CheckOut
     @counter.each do | product_code, number_of_items |
       aux += @pricing_rules[product_code].execute(number_of_items, MockProducts.get_price(product_code))
     end
-    return aux
+    return aux.round(2)
   end
 end
