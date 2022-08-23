@@ -3,6 +3,40 @@ Ruby classes to agregate items and proces their prices given diferent price rule
 
 ## Solution explained
 
+El objetivo de la solucion aportada a sido desacoplar la logica de calculo de precios de la classe chekcout y las pricing rules.
+
+Para conseguir esto se ha planteado una classe "BaseRule" de la que heredan las demas reglas de calculo de precios (PayOneGetXForFreeRule, ApplyDiscountRule, ChangeBasePriceRule), estas subclasses implementan un constructor con los parametros necessarios para inicializar la regla y una concrecion del metodo "execute".
+
+Por otra banda, la classe checkout cumple con el contrato de interficie especificado en los requisitos. Esto lo hace contando cuantas ocurrencias scanea de cada codigo de producto y finalmente obtiene el total a partir de las reglas de precios correctamente inicalizadas para cada producto.
+
+Los archivos a tener en cuenta para todo esto son:
+
+```bash
+ lib/base_rule.rb
+ lib/pay_one_get_x_for_free_rule.rb
+ lib/change_base_price_rule.rb
+ lib/apply_discount_rule.rb  
+ lib/check_out.rb 
+```
+
+Sin enbargo, no me ha dado tiempo de bajar el acoplamiento de la classe check_out.rb con mock_products.rb, aun asi, pienso que sigue siendo una buena solucion, ya que esta classe podria obtener los precios del un servicio de datos y no de un hash map estatico como lo hace ahora.
+
+```bash
+lib/mock_products_spec.rb 
+```
+
+Finalmente, se han incluido rspec test para todas las classes de proyecto y con diferentes contextos para verificar las funcionalidades parametrizables de estas classes.
+
+```bash
+ test/spec/base_rule_spec.rb
+ test/spec/pay_one_get_x_for_free_rule_spec.rb
+ test/spec/change_base_price_rule_spec.rb
+ test/spec/apply_discount_rule_spec.rb  
+ test/spec/mock_products_spec.rb 
+ test/spec/check_out_spec.rb 
+```
+
+Especial atencion a la RSpec "check_out_spec.rb" este test contiene un contexto para la test data de los requisitos con y sin reglas de precios.
 
 
 ## Tech Stack
