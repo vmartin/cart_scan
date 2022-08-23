@@ -22,7 +22,7 @@ The files to keep in mind for all this are:
 However, I haven't had time to download the coupling of the check_out.rb class with mock_products.rb, even so, I think it's still a good solution, since this class could obtain the prices of a data service and not of a static hash map as it does now.
 
 ```bash
-lib/mock_products_spec.rb 
+lib/mock_products.rb 
 ```
 
 Finally, rspec tests have been included for all the project classes and with different contexts to verify the parameterizable functionalities of these classes.
@@ -36,8 +36,54 @@ Finally, rspec tests have been included for all the project classes and with dif
  test/spec/check_out_spec.rb 
 ```
 
-Special attention to the RSpec "check_out_spec.rb" this test contains a context for the test data of the requirements with and without pricing rules.
+Special attention to the RSpec "check_out_spec.rb" this test contains a context for the test data of the requirements with and without pricing rules. In this file can see how use the solution:
 
+```bash
+describe CheckOut do
+
+  context ": In the context of pricings and princing rules of requirements" do
+    
+    let(:pricing_rules){
+      #by default BaseRule      
+      pricing_rules = Hash.new(BaseRule.new)
+      
+      #instance and add to rules for code GR1 the pay-one-get-1-for-free rule
+      x_for_free_value = 1    
+      pricing_rules["GR1"] = PayOneGetXForFreeRule.new(x_for_free_value)
+
+        
+      #instance and add to rules for code SR1 the change-base-price rule       
+      items_to_get_a_good_price = 3
+      new_price = BigDecimal("4.5")
+      pricing_rules["SR1"] = ChangeBasePriceRule.new(items_to_get_a_good_price, new_price)
+      
+
+      #instance and add to rules for code CF1 the apply-discount rule
+      minimum_items_to_get_good_price = 3
+      parts = 2
+      total_parts = 3
+      pricing_rules["CF1"] = ApplyDiscountRule.new(minimum_items_to_get_good_price, parts, total_parts)
+      
+      pricing_rules
+    }
+
+    it "should get expected total price of 22.45£ when basket is: GR1,SR1,GR1,GR1,CF1" do 
+      co = CheckOut.new(pricing_rules)
+      co.scan("GR1")
+      co.scan("SR1")
+      co.scan("GR1")
+      co.scan("GR1")
+      co.scan("CF1")
+      price = co.total 
+
+      expect(price).to eq(22.45)
+    end
+
+    # more assertions not listed ...
+
+  end
+end
+```
 
 ## Tech Stack
 
